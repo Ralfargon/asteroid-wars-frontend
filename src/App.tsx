@@ -1,75 +1,87 @@
 import reactLogo from './assets/react.svg'
 import './App.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { signUpNameChange, selectSignUp } from './store';
+import { signUpNameChange, selectSignUp, signUpSurnameChange, signUpEmailChange, signUpPasswordChange } from './store';
 
 
 function App() {
   const dispatch = useDispatch();
   const signUpState = useSelector(selectSignUp);
 
-
   return (
-    <div className="App">
+    <div>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
         <a href="https://reactjs.org" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
+
       <h1>Asteroid Wars</h1>
-      <div className="cardcreate">
-        <form className="createform" onSubmit={(e) => {
+
+      <div className='erros'>
+        {signUpState.erros.name == "" ? "" : <p className='texterros'>{signUpState.erros.name}</p>}
+        {signUpState.erros.surname == "" ? "" : <p className='texterros'>{signUpState.erros.surname}</p>}
+        {signUpState.erros.email == "" ? "" : <p className='texterros'>{signUpState.erros.email}</p>}
+        {signUpState.erros.password == "" ? "" : <p className='texterros'>{signUpState.erros.password}</p>}
+      </div>
+
+      <div>
+        <form className="signUpForm" onSubmit={(e) => {
           e.preventDefault();
-          if(signUpState.erros.name != ""){
+          if (signUpState.erros.name != "") {
             console.log(signUpState.erros.name)
           }
-
           return false
         }}>
-          <div className="inputCreateForm">
-            <label>
-              <span className="spanCreateForm">
-              Name:
+
+          <div className='inputSpan'>
+            <div>
+              <span>
+                Name:
               </span>
-              <input type="text" name="name" onChange={(e) => dispatch(signUpNameChange(e.target.value))}/>
-            </label>
-          </div>
-          {signUpState.erros.name == "" ? "" : <div>{signUpState.erros.name}</div>}
-          <div className="inputCreateForm">
-            <label>
-              <span className="spanCreateForm">
-              E-mail:
+            </div>
+            <div>
+              <span>
+                Surname:
               </span>
-              <input type="text" name="email" />
-            </label>
-          </div>
-          <div className="inputCreateForm">
-            <label>
-              <span className="spanCreateForm">
+            </div>
+            <div>
+              <span>
+                E-mail:
+              </span>
+            </div>
+            <div>
+              <span>
                 Password:
               </span>
-              <input type="text" name="password" />
-            </label>
+            </div>
           </div>
 
-          <div>
+          <div className='inputArea'>
+            <div>
+              <input type="text" name="name" onChange={(e) => dispatch(signUpNameChange(e.target.value))} />
+            </div>
+            <div>
+              <input type="text" name="surname" onChange={(e) => dispatch(signUpSurnameChange(e.target.value))}/>
+            </div>
+            <div>
+              <input type="text" name="email" onChange={(e) => dispatch(signUpEmailChange(e.target.value))}/>
+            </div>
+            <div>
+              <input type="text" name="password" onChange={(e) => dispatch(signUpPasswordChange(e.target.value))}/>
+            </div>
+          </div>
+
+          <div className="signUpAccount">
             <button>
-              Create Account
+              Sign Up
             </button>
           </div>
-
         </form>
       </div>
-      <div className="card">
-        <button >
-          Sign In
-        </button>
-      </div>
-      <p className="read-the-docs">
-        Click on Create Account or Sign In
+
+      <p>
+        Already has an account? <a href='#'>Sign In here!</a>
       </p>
     </div>
   )
