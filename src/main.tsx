@@ -9,6 +9,7 @@ import { store } from './store'
 import NotFound from './pages/NotFound/NotFound';
 import SignUp from './pages/SignUp/SignUp';
 import SignIn from './pages/SignIn/SignIn';
+import AccountCreated from './pages/AccountCreated/AccountCreated';
 
 
 const router = createBrowserRouter([
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "SignIn",
     element: <SignIn />,
+  },
+  {
+    path: "AccountCreated",
+    element: <AccountCreated />,
   },
 ]);
 

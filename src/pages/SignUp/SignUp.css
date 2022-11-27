@@ -45,7 +45,6 @@
     grid-template-columns: 1fr auto;
     grid-template-rows: 1fr 1fr auto;
     gap: 1rem;
-  
   }
   
   .signUpAccount {

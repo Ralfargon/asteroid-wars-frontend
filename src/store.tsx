@@ -12,6 +12,14 @@ type AppState = {
             email: string,
             password: string
         }
+    },
+    signin: {
+        email: string,
+        password: string,
+        erros: {
+            email: string,
+            password: string
+        }
     }
 };
 
@@ -25,6 +33,14 @@ function initialState(): AppState {
             erros: {
                 name: "",
                 surname: "",
+                email: "",
+                password: ""
+            }
+        },
+        signin: {
+            email: "",
+            password: "",
+            erros: {
                 email: "",
                 password: ""
             }
@@ -74,17 +90,41 @@ const counterSlice = createSlice({
             } else {
                 state.signup.erros.password = "Invalid password";
             }
+        },
+
+
+        signInEmail: (state, param) => {
+            state.signin.email = param.payload;
+
+            if (state.signin.email != ""){
+                state.signin.erros.email = "";
+            } else {
+                state.signup.erros.email = "Invalid email";
+            }
+        },
+
+        signInPassword: (state, param) => {
+            state.signin.password = param.payload;
+
+            if (state.signin.password != ""){
+                state.signin.erros.password = "";
+            } else {
+                state.signup.erros.password = "Invalid password";
+            }
         }
+
+
     }
 
 });
 
 export const selectSignUp = (state: AppState) => state.signup;
+export const selectSignIn = (state: AppState) => state.signin;
 
 export const store = configureStore({
     reducer: counterSlice.reducer
 })
 
-export const { signUpNameChange, signUpSurnameChange, signUpEmailChange,  signUpPasswordChange} = counterSlice.actions
+export const { signUpNameChange, signUpSurnameChange, signUpEmailChange,  signUpPasswordChange, signInEmail, signInPassword} = counterSlice.actions
 
 

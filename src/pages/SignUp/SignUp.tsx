@@ -28,8 +28,10 @@ function SignUp() {
       <div>
         <form className="signUpForm" onSubmit={(e) => {
           e.preventDefault();
-          if (signUpState.erros.name != "") {
-            console.log(signUpState.erros.name)
+          if (signUpState.name != "" && signUpState.surname != "" && signUpState.email != "" && signUpState.password != "") {
+            let responseApiSignUp = `{email: ${signUpState.email}, password: ${signUpState.password}, first_name: ${signUpState.name}, surname: ${signUpState.surname}}`;
+
+            console.log(responseApiSignUp)
           }
           return false
         }}>
