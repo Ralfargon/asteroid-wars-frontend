@@ -59,7 +59,7 @@ const counterSlice = createSlice({
         signUpEmailChange: (state, param) => {
             state.signup.email = param.payload;
 
-                if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(state.signup.email)){
+                if (state.signup.email == "" || /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(state.signup.email)){
                     state.signup.erros.email = "";
                 } else {
                     state.signup.erros.email = "Invalid e-mail";
@@ -69,10 +69,10 @@ const counterSlice = createSlice({
         signUpPasswordChange: (state, param) => {
             state.signup.password = param.payload;
 
-            if (/\d/.test(state.signup.email)){
-                state.signup.erros.password = "Invalid password";
-            } else {
+            if (state.signup.password == "" || /.{2}/.test(state.signup.password)){
                 state.signup.erros.password = "";
+            } else {
+                state.signup.erros.password = "Invalid password";
             }
         }
     }
